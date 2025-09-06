@@ -1,30 +1,66 @@
-<!-- src/app/components/profile/profile.component.html (Using helper method) -->
+<!-- src/app/components/profile/profile.component.html -->
 <div class="profile-container">
+  @if (currentUser) {
   <div class="profile-card">
     <div class="profile-header">
       <div class="profile-avatar">
-        {{ getUserInitial() }}
+        @if (currentUser.profilePicture) {
+        <img [src]="currentUser.profilePicture" [alt]="getDisplayName()" class="avatar-image" />
+        } @else {
+        <span class="avatar-initial">{{ getUserInitial() }}</span>
+        }
       </div>
-      <h1>{{ currentUser?.username || 'Unknown User' }}</h1>
-      <p>{{ currentUser?.email || 'No email provided' }}</p>
+      <h1>{{ getDisplayName() }}</h1>
+      <p>{{ getDisplayEmail() }}</p>
+      <div class="provider-badge">
+        <span class="provider-icon">
+          @if (currentUser.provider === 'google') { 🔍 } @else if (currentUser.provider ===
+          'facebook') { 📘 } @else if (currentUser.provider === 'twitter') { 🐦 } @else { ✉️ }
+        </span>
+        {{ getProviderDisplay() }}
+      </div>
     </div>
 
     <div class="profile-info">
       <h2>Profile Information</h2>
       <div class="info-grid">
+        @if (currentUser.firstName || currentUser.lastName) {
+        <div class="info-item">
+          <label>Full Name:</label>
+          <span>{{ getDisplayName() }}</span>
+        </div>
+        }
         <div class="info-item">
           <label>Username:</label>
-          <span>{{ currentUser?.username || 'N/A' }}</span>
+          <span>{{ currentUser.username }}</span>
         </div>
         <div class="info-item">
           <label>Email:</label>
-          <span>{{ currentUser?.email || 'N/A' }}</span>
+          <span>{{ getDisplayEmail() }}</span>
         </div>
         <div class="info-item">
           <label>User ID:</label>
-          <span>{{ currentUser?.id || 'N/A' }}</span>
+          <span>{{ getDisplayId() }}</span>
+        </div>
+        <div class="info-item">
+          <label>Account Type:</label>
+          <span>{{ getProviderDisplay() }}</span>
         </div>
       </div>
     </div>
+
+    <div class="profile-actions">
+      <button class="action-btn primary-btn">Edit Profile</button>
+      <button class="action-btn secondary-btn">Change Password</button>
+    </div>
   </div>
+  } @else {
+  <div class="profile-card">
+    <div class="loading-message">
+      <div class="loading-spinner"></div>
+      <h2>Loading profile...</h2>
+      <p>Please wait while we load your profile information.</p>
+    </div>
+  </div>
+  }
 </div>

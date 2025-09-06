@@ -1,48 +1,101 @@
 <!-- src/app/features/dashboard/dashboard.component.html -->
 <div class="dashboard-container">
   <div class="dashboard-header">
-    <h1>Dashboard</h1>
-    <p>Your movie night statistics and recent activities</p>
+    <h1>{{ getWelcomeMessage() }}</h1>
+    <p>Here's your movie night statistics and recent activities</p>
   </div>
 
   <div class="stats-grid">
-    <div class="stat-card">
-      <div class="stat-number">{{ totalMovieNights }}</div>
-      <div class="stat-label">Movie Nights Planned</div>
+    <div class="stat-card movie-nights">
+      <div class="stat-icon">🎬</div>
+      <div class="stat-content">
+        <div class="stat-number">{{ totalMovieNights }}</div>
+        <div class="stat-label">Movie Nights Planned</div>
+      </div>
     </div>
 
-    <div class="stat-card">
-      <div class="stat-number">{{ totalMoviesWatched }}</div>
-      <div class="stat-label">Movies Watched</div>
+    <div class="stat-card movies-watched">
+      <div class="stat-icon">🍿</div>
+      <div class="stat-content">
+        <div class="stat-number">{{ totalMoviesWatched }}</div>
+        <div class="stat-label">Movies Watched</div>
+      </div>
     </div>
 
-    <div class="stat-card">
-      <div class="stat-number">{{ totalHoursWatched }}</div>
-      <div class="stat-label">Hours of Entertainment</div>
+    <div class="stat-card hours-entertainment">
+      <div class="stat-icon">⏰</div>
+      <div class="stat-content">
+        <div class="stat-number">{{ totalHoursWatched }}</div>
+        <div class="stat-label">Hours of Entertainment</div>
+      </div>
     </div>
   </div>
 
-  <div class="recent-events">
-    <h2>Recent Movie Nights</h2>
-    @if (savedEvents.length === 0) {
-    <div class="no-events">
-      <p>No movie nights planned yet!</p>
-      <a routerLink="/planner" class="cta-btn">Plan Your First Movie Night</a>
-    </div>
-    } @else {
-    <div class="events-list">
-      @for (event of savedEvents.slice(0, 5); track event.id) {
-      <div class="event-card">
-        <div class="event-date">
-          {{ event.date | date : 'mediumDate' }}
-        </div>
-        <div class="event-details">
-          <h3>{{ event.location || 'Movie Night' }}</h3>
-          <p>{{ event.movies.length }} movies • {{ event.attendees.length }} attendees</p>
-        </div>
+  <div class="dashboard-content">
+    <div class="recent-events">
+      <h2>Recent Movie Nights</h2>
+      @if (savedEvents.length === 0) {
+      <div class="no-events">
+        <div class="no-events-icon">🎭</div>
+        <h3>No movie nights planned yet!</h3>
+        <p>Start planning your first movie night and create unforgettable memories with friends.</p>
+        <a routerLink="/planner" class="cta-btn">Plan Your First Movie Night</a>
       </div>
-      }
+      } @else {
+      <div class="events-list">
+        @for (event of savedEvents.slice(0, 5); track event.id) {
+        <div class="event-card">
+          <div class="event-date">
+            <div class="date-day">{{ event.date | date : 'dd' }}</div>
+            <div class="date-month">{{ event.date | date : 'MMM' }}</div>
+          </div>
+          <div class="event-details">
+            <h3>{{ event.location || 'Movie Night' }}</h3>
+            <p class="event-info">
+              <span class="info-item">
+                <span class="info-icon">🎬</span>
+                {{ event.movies.length }} movies
+              </span>
+              <span class="info-item">
+                <span class="info-icon">👥</span>
+                {{ event.attendees.length }} attendees
+              </span>
+              @if (event.snacks.length > 0) {
+              <span class="info-item">
+                <span class="info-icon">🍿</span>
+                {{ event.snacks.length }} snacks
+              </span>
+              }
+            </p>
+          </div>
+          <div class="event-actions">
+            <button class="view-btn">View Details</button>
+          </div>
+        </div>
+        }
+      </div>
+      @if (savedEvents.length > 5) {
+      <div class="view-all">
+        <a routerLink="/planner" class="view-all-btn">View All Movie Nights</a>
+      </div>
+      } }
     </div>
-    }
+
+    <div class="quick-actions">
+      <h2>Quick Actions</h2>
+      <div class="actions-grid">
+        <a routerLink="/planner" class="action-card primary">
+          <div class="action-icon">🎬</div>
+          <h3>Plan New Movie Night</h3>
+          <p>Create a new movie night event</p>
+        </a>
+
+        <a routerLink="/profile" class="action-card secondary">
+          <div class="action-icon">👤</div>
+          <h3>View Profile</h3>
+          <p>Manage your account settings</p>
+        </a>
+      </div>
+    </div>
   </div>
 </div>

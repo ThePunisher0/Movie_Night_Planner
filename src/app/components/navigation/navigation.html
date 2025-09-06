@@ -13,7 +13,9 @@
     </div>
 
     <div class="nav-user">
-      <span class="user-welcome">Welcome, {{ currentUser?.username }}</span>
+      <span class="user-welcome"
+        >Welcome, {{ currentUser?.firstName || currentUser?.username }}</span
+      >
       <button (click)="logout()" class="logout-btn">Logout</button>
     </div>
   </div>

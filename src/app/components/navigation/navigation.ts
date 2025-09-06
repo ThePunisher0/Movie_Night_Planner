@@ -1,4 +1,4 @@
-// src/app/components/navigation/navigation.component.ts (Complete)
+// src/app/components/navigation/navigation.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, RouterModule } from '@angular/router';

@@ -1,4 +1,4 @@
-// src/app/services/movie.service.ts (Updated for public folder)
+// src/app/services/movie.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { Movie } from '../model/interface-movie';
@@ -13,7 +13,7 @@ export class MovieService {
       genre: 'Sci-Fi',
       rating: 8.7,
       duration: 136,
-      poster: 'images/movies/matrix.jpg', // Note: no 'public/' prefix needed
+      poster: 'images/movies/the-matrix.jpg',
       selected: false,
     },
     {
@@ -31,7 +31,7 @@ export class MovieService {
       genre: 'Action',
       rating: 8.0,
       duration: 143,
-      poster: 'images/movies/avengers.jpg',
+      poster: 'images/movies/the-avengers.jpg',
       selected: false,
     },
     {
@@ -49,7 +49,7 @@ export class MovieService {
       genre: 'Horror',
       rating: 7.7,
       duration: 104,
-      poster: 'images/movies/getout.jpg',
+      poster: 'images/movies/get-out.jpg',
       selected: false,
     },
     {

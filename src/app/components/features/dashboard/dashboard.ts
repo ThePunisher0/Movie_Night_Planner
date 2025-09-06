@@ -1,9 +1,10 @@
-// src/app/features/dashboard/dashboard.component.ts (Complete)
+// src/app/features/dashboard/dashboard.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { MovieNight } from '../../../model/interface-movie-night';
 import { MovieNightService } from '../../../services/movie-night';
+import { AuthService, User } from '../../../services/auth';
 @Component({
   selector: 'app-dashboard',
   standalone: true,
@@ -16,10 +17,17 @@ export class DashboardComponent implements OnInit {
   totalMovieNights = 0;
   totalMoviesWatched = 0;
   totalHoursWatched = 0;
-  constructor(private movieNightService: MovieNightService) {}
+  currentUser: User | null = null;
+
+  constructor(private movieNightService: MovieNightService, private authService: AuthService) {}
+
   ngOnInit(): void {
+    this.authService.currentUser$.subscribe((user) => {
+      this.currentUser = user;
+    });
     this.loadDashboardData();
   }
+
   private loadDashboardData(): void {
     this.savedEvents = this.movieNightService.getSavedEvents();
     this.totalMovieNights = this.savedEvents.length;
@@ -34,5 +42,17 @@ export class DashboardComponent implements OnInit {
         0
       ) / 60
     );
+  }
+
+  getWelcomeMessage(): string {
+    const hour = new Date().getHours();
+    let greeting = '';
+
+    if (hour < 12) greeting = 'Good morning';
+    else if (hour < 18) greeting = 'Good afternoon';
+    else greeting = 'Good evening';
+
+    const name = this.currentUser?.firstName || this.currentUser?.username || 'Movie Lover';
+    return `${greeting}, ${name}!`;
   }
 }
