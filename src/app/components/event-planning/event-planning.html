@@ -1,0 +1,73 @@
+<!-- src/app/components/event-planning/event-planning.component.html -->
+<section class="event-planning">
+  <h2>Plan Your Movie Night</h2>
+
+  <div class="planning-form">
+    <div class="form-group">
+      <label for="date">Date & Time</label>
+      <input
+        type="datetime-local"
+        id="date"
+        [(ngModel)]="currentEvent.date"
+        (ngModelChange)="onEventChange()"
+        class="form-input"
+      />
+    </div>
+
+    <div class="form-group">
+      <label for="location">Location</label>
+      <input
+        type="text"
+        id="location"
+        [(ngModel)]="currentEvent.location"
+        (ngModelChange)="onEventChange()"
+        placeholder="Enter location"
+        class="form-input"
+      />
+    </div>
+
+    <div class="form-group">
+      <label>Attendees</label>
+      <div class="attendees-input">
+        <input
+          type="text"
+          [(ngModel)]="newAttendee"
+          placeholder="Add attendee name"
+          class="form-input"
+          (keyup.enter)="addAttendee()"
+        />
+        <button (click)="addAttendee()" class="add-btn">Add</button>
+      </div>
+      <div class="attendees-list">
+        @for (attendee of currentEvent.attendees; track $index) {
+        <span class="attendee-tag">
+          {{ attendee }}
+          <button (click)="removeAttendee($index)" class="remove-btn">×</button>
+        </span>
+        }
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label>Snacks & Drinks</label>
+      <div class="snacks-input">
+        <input
+          type="text"
+          [(ngModel)]="newSnack"
+          placeholder="Add snack or drink"
+          class="form-input"
+          (keyup.enter)="addSnack()"
+        />
+        <button (click)="addSnack()" class="add-btn">Add</button>
+      </div>
+      <div class="snacks-list">
+        @for (snack of currentEvent.snacks; track $index) {
+        <span class="snack-tag">
+          {{ snack }}
+          <button (click)="removeSnack($index)" class="remove-btn">×</button>
+        </span>
+        }
+      </div>
+    </div>
+  </div>
+</section>

@@ -1,0 +1,30 @@
+<!-- src/app/components/profile/profile.component.html (Using helper method) -->
+<div class="profile-container">
+  <div class="profile-card">
+    <div class="profile-header">
+      <div class="profile-avatar">
+        {{ getUserInitial() }}
+      </div>
+      <h1>{{ currentUser?.username || 'Unknown User' }}</h1>
+      <p>{{ currentUser?.email || 'No email provided' }}</p>
+    </div>
+
+    <div class="profile-info">
+      <h2>Profile Information</h2>
+      <div class="info-grid">
+        <div class="info-item">
+          <label>Username:</label>
+          <span>{{ currentUser?.username || 'N/A' }}</span>
+        </div>
+        <div class="info-item">
+          <label>Email:</label>
+          <span>{{ currentUser?.email || 'N/A' }}</span>
+        </div>
+        <div class="info-item">
+          <label>User ID:</label>
+          <span>{{ currentUser?.id || 'N/A' }}</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

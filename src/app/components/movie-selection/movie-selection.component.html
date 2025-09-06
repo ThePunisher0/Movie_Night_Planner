@@ -1,0 +1,49 @@
+<!-- src/app/components/movie-selection/movie-selection.component.html -->
+<section class="movie-selection">
+  <h2>Select Movies</h2>
+  <div class="search-bar">
+    <input 
+      type="text" 
+      [(ngModel)]="searchTerm" 
+      placeholder="Search movies..."
+      class="search-input"
+    >
+    <select [(ngModel)]="selectedGenre" class="genre-filter">
+      <option value="">All Genres</option>
+      @for (genre of genres; track genre) {
+        <option [value]="genre">{{ genre }}</option>
+      }
+    </select>
+  </div>
+  <div class="movies-grid">
+    @for (movie of filteredMovies; track movie.id) {
+      <div 
+        class="movie-card"
+        [class.selected]="movie.selected"
+        (click)="toggleMovieSelection(movie)"
+      >
+        <div class="poster-container">
+          <img 
+            [src]="movie.poster" 
+            [alt]="movie.title"
+            class="movie-poster"
+            (error)="onImageError($event, movie)"
+            loading="lazy"
+          >
+          <div class="poster-overlay"></div>
+        </div>
+        <div class="movie-info">
+          <h3>{{ movie.title }}</h3>
+          <p class="genre">{{ movie.genre }}</p>
+          <div class="movie-details">
+            <span class="rating">⭐ {{ movie.rating }}/10</span>
+            <span class="duration">{{ movie.duration }}min</span>
+          </div>
+        </div>
+        @if (movie.selected) {
+          <div class="selection-indicator">✓</div>
+        }
+      </div>
+    }
+  </div>
+</section>

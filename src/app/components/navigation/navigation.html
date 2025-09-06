@@ -1,0 +1,21 @@
+<!-- src/app/components/navigation/navigation.component.html -->
+@if (isLoggedIn) {
+<nav class="navbar">
+  <div class="nav-container">
+    <div class="nav-brand">
+      <a routerLink="/planner" class="brand-link"> 🎬 Movie Night Planner </a>
+    </div>
+
+    <div class="nav-menu">
+      <a routerLink="/planner" routerLinkActive="active" class="nav-link"> Movie Planner </a>
+      <a routerLink="/dashboard" routerLinkActive="active" class="nav-link"> Dashboard </a>
+      <a routerLink="/profile" routerLinkActive="active" class="nav-link"> Profile </a>
+    </div>
+
+    <div class="nav-user">
+      <span class="user-welcome">Welcome, {{ currentUser?.username }}</span>
+      <button (click)="logout()" class="logout-btn">Logout</button>
+    </div>
+  </div>
+</nav>
+}

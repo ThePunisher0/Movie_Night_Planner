@@ -1,0 +1,48 @@
+<!-- src/app/features/dashboard/dashboard.component.html -->
+<div class="dashboard-container">
+  <div class="dashboard-header">
+    <h1>Dashboard</h1>
+    <p>Your movie night statistics and recent activities</p>
+  </div>
+
+  <div class="stats-grid">
+    <div class="stat-card">
+      <div class="stat-number">{{ totalMovieNights }}</div>
+      <div class="stat-label">Movie Nights Planned</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-number">{{ totalMoviesWatched }}</div>
+      <div class="stat-label">Movies Watched</div>
+    </div>
+
+    <div class="stat-card">
+      <div class="stat-number">{{ totalHoursWatched }}</div>
+      <div class="stat-label">Hours of Entertainment</div>
+    </div>
+  </div>
+
+  <div class="recent-events">
+    <h2>Recent Movie Nights</h2>
+    @if (savedEvents.length === 0) {
+    <div class="no-events">
+      <p>No movie nights planned yet!</p>
+      <a routerLink="/planner" class="cta-btn">Plan Your First Movie Night</a>
+    </div>
+    } @else {
+    <div class="events-list">
+      @for (event of savedEvents.slice(0, 5); track event.id) {
+      <div class="event-card">
+        <div class="event-date">
+          {{ event.date | date : 'mediumDate' }}
+        </div>
+        <div class="event-details">
+          <h3>{{ event.location || 'Movie Night' }}</h3>
+          <p>{{ event.movies.length }} movies • {{ event.attendees.length }} attendees</p>
+        </div>
+      </div>
+      }
+    </div>
+    }
+  </div>
+</div>

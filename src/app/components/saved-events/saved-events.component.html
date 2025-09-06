@@ -1,0 +1,19 @@
+<!-- src/app/components/saved-events/saved-events.component.html -->
+@if (savedEvents.length > 0) {
+<section class="saved-events">
+  <h2>Saved Movie Nights</h2>
+  <div class="events-list">
+    @for (event of savedEvents; track event.id) {
+    <div class="saved-event-card">
+      <div class="event-header">
+        <h3>{{ event.date | date : 'mediumDate' }}</h3>
+        <button (click)="onDeleteEvent(event.id)" class="delete-btn">Delete</button>
+      </div>
+      <p><strong>Location:</strong> {{ event.location }}</p>
+      <p><strong>Movies:</strong> {{ event.movies.length }}</p>
+      <p><strong>Attendees:</strong> {{ event.attendees.length }}</p>
+    </div>
+    }
+  </div>
+</section>
+}

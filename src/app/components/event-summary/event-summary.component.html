@@ -1,0 +1,46 @@
+<!-- src/app/components/event-summary/event-summary.component.html -->
+<section class="event-summary">
+  <h2>Movie Night Summary</h2>
+
+  <div class="summary-card">
+    <div class="selected-movies">
+      <h3>Selected Movies ({{ selectedMovies.length }})</h3>
+      <div class="selected-movies-list">
+        @for(movie of selectedMovies; track movie.id) {
+        <div class="selected-movie">
+          <img [src]="movie.poster" [alt]="movie.title" class="mini-poster" />
+          <div class="movie-summary">
+            <h4>{{ movie.title }}</h4>
+            <p>{{ movie.duration }}min • {{ movie.genre }}</p>
+          </div>
+        </div>
+        }
+      </div>
+      <p class="total-duration">Total Duration: {{ totalDuration }} minutes</p>
+    </div>
+
+    <div class="event-details">
+      <div class="detail-item">
+        <strong>Date:</strong>
+        {{ currentEvent.date | date : 'medium' }}
+      </div>
+      <div class="detail-item">
+        <strong>Location:</strong>
+        {{ currentEvent.location || 'Not specified' }}
+      </div>
+      <div class="detail-item">
+        <strong>Attendees:</strong>
+        {{ currentEvent.attendees.length }} people
+      </div>
+      <div class="detail-item">
+        <strong>Snacks:</strong>
+        {{ currentEvent.snacks.length }} items
+      </div>
+    </div>
+
+    <div class="action-buttons">
+      <button (click)="onSaveEvent()" class="save-btn">Save Movie Night</button>
+      <button (click)="onClearAll()" class="clear-btn">Clear All</button>
+    </div>
+  </div>
+</section>

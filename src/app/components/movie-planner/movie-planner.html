@@ -1,0 +1,24 @@
+<!-- src/app/components/movie-planner/movie-planner.component.html -->
+<div class="movie-planner-container">
+  <header class="header">
+    <h1>🎬 Movie Night Planner</h1>
+    <p>Plan the perfect movie night with friends</p>
+  </header>
+
+  <div class="main-content">
+    <app-movie-selection></app-movie-selection>
+
+    <app-event-planning [currentEvent]="currentEvent" (eventChange)="onEventChange($event)">
+    </app-event-planning>
+
+    <app-event-summary
+      [currentEvent]="currentEvent"
+      (saveEvent)="onSaveEvent()"
+      (clearAll)="onClearAll()"
+    >
+    </app-event-summary>
+
+    <app-saved-events [savedEvents]="savedEvents" (deleteEvent)="onDeleteEvent($event)">
+    </app-saved-events>
+  </div>
+</div>

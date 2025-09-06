@@ -1,0 +1,106 @@
+/* Styles for event-summary component */
+/* src/app/components/event-summary/event-summary.component.css */
+.event-summary {
+  background: white;
+  padding: 25px;
+  border-radius: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+  grid-column: 1 / -1;
+}
+.summary-card {
+  background: #f8f9ff;
+  border: 2px solid #e2e8f0;
+  border-radius: 12px;
+  padding: 25px;
+}
+.selected-movies-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  margin: 15px 0;
+}
+.selected-movie {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.mini-poster {
+  width: 60px;
+  height: 80px;
+  object-fit: cover;
+  border-radius: 4px;
+}
+.movie-summary h4 {
+  margin: 0 0 5px 0;
+  color: #333;
+}
+.movie-summary p {
+  margin: 0;
+  color: #666;
+  font-size: 0.9rem;
+}
+.total-duration {
+  font-weight: 600;
+  color: #667eea;
+  margin-top: 15px;
+  padding: 10px;
+  background: white;
+  border-radius: 8px;
+  text-align: center;
+}
+.event-details {
+  margin: 20px 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+.detail-item {
+  background: white;
+  padding: 15px;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+.action-buttons {
+  display: flex;
+  gap: 15px;
+  justify-content: center;
+  margin-top: 25px;
+}
+.save-btn,
+.clear-btn {
+  padding: 15px 30px;
+  border: none;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+.save-btn {
+  background: #48bb78;
+  color: white;
+}
+.save-btn:hover {
+  background: #38a169;
+}
+.clear-btn {
+  background: #e53e3e;
+  color: white;
+}
+.clear-btn:hover {
+  background: #c53030;
+}
+h2 {
+  color: #333;
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+h3 {
+  color: #333;
+  margin-bottom: 15px;
+  font-size: 1.4rem;
+}

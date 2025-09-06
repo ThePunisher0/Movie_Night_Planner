@@ -1,36 +1,37 @@
-// src/app/app.component.ts
+// src/app/components/movie-planner/movie-planner.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MovieSelectionComponent } from './components/movie-selection/movie-selection.component';
-import { EventSummaryComponent } from './components/event-summary/event-summary.component';
-import { SavedEventsComponent } from './components/saved-events/saved-events.component';
-import { MovieNight } from './model/interface-movie-night';
-import { MovieService } from './services/movie';
-import { MovieNightService } from './services/movie-night';
-import { RouterOutlet } from '@angular/router';
-import { NavigationComponent } from './components/navigation/navigation';
-import { EventPlanningComponent } from "./components/event-planning/event-planning";
+import { MovieSelectionComponent } from '../movie-selection/movie-selection.component';
+// import { EventPlanningComponent } from '../event-planning/event-planning.component';
+import { EventSummaryComponent } from '../event-summary/event-summary.component';
+import { SavedEventsComponent } from '../saved-events/saved-events.component';
+import { MovieNight } from '../../model/interface-movie-night';
+import { MovieService } from '../../services/movie';
+import { MovieNightService } from '../../services/movie-night';
+import { EventPlanningComponent } from "../event-planning/event-planning";
 
 @Component({
-  selector: 'app-root',
+  selector: 'app-movie-planner',
   standalone: true,
   imports: [
-    RouterOutlet,
     CommonModule,
     MovieSelectionComponent,
+    // EventPlanningComponent,
     EventSummaryComponent,
     SavedEventsComponent,
-    NavigationComponent,
     EventPlanningComponent
 ],
-  templateUrl: './app.html',
-  styleUrl: './app.scss',
+  templateUrl: './movie-planner.html',
+  styleUrls: ['./movie-planner.scss']
 })
-export class AppComponent implements OnInit {
+export class MoviePlannerComponent implements OnInit {
   currentEvent!: MovieNight;
   savedEvents: MovieNight[] = [];
 
-  constructor(private movieService: MovieService, private movieNightService: MovieNightService) {}
+  constructor(
+    private movieService: MovieService,
+    private movieNightService: MovieNightService
+  ) {}
 
   ngOnInit(): void {
     this.currentEvent = this.movieNightService.createEmptyEvent();
@@ -44,7 +45,7 @@ export class AppComponent implements OnInit {
   onSaveEvent(): void {
     const selectedMovies = this.movieService.getSelectedMovies();
     this.currentEvent.movies = [...selectedMovies];
-
+    
     this.movieNightService.saveMovieNight(this.currentEvent);
     this.savedEvents = this.movieNightService.getSavedEvents();
     this.onClearAll();
