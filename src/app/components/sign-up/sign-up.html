@@ -1,4 +1,3 @@
-<!-- src/app/components/signup/signup.component.html -->
 <div class="signup-container">
   <div class="signup-card">
     <div class="signup-header">
@@ -6,7 +5,6 @@
       <p>Create your account to start planning amazing movie nights</p>
     </div>
 
-    <!-- Social Login Buttons -->
     <div class="social-login-section">
       <p class="social-title">Sign up with</p>
       <div class="social-buttons">
@@ -79,8 +77,7 @@
       <span>or sign up with email</span>
     </div>
 
-    <!-- Signup Form -->
-    <form (ngSubmit)="onSubmit()" class="signup-form">
+    <form #signupForm="ngForm" (ngSubmit)="onSubmit()" class="signup-form">
       <div class="form-row">
         <div class="form-group">
           <label for="firstName">First Name</label>
@@ -91,8 +88,13 @@
             name="firstName"
             class="form-input"
             placeholder="Enter your first name"
+            required
+            #firstNameCtrl="ngModel"
             [disabled]="isLoading"
           />
+          @if (firstNameCtrl.touched && firstNameCtrl.invalid) {
+          <div class="error-message">First name is required</div>
+          }
         </div>
 
         <div class="form-group">
@@ -104,8 +106,13 @@
             name="lastName"
             class="form-input"
             placeholder="Enter your last name"
+            required
+            #lastNameCtrl="ngModel"
             [disabled]="isLoading"
           />
+          @if (lastNameCtrl.touched && lastNameCtrl.invalid) {
+          <div class="error-message">Last name is required</div>
+          }
         </div>
       </div>
 
@@ -118,8 +125,13 @@
           name="username"
           class="form-input"
           placeholder="Choose a username"
+          required
+          #usernameCtrl="ngModel"
           [disabled]="isLoading"
         />
+        @if (usernameCtrl.touched && usernameCtrl.invalid) {
+        <div class="error-message">Username is required</div>
+        }
       </div>
 
       <div class="form-group">
@@ -131,8 +143,16 @@
           name="email"
           class="form-input"
           placeholder="Enter your email"
+          required
+          email
+          #emailCtrl="ngModel"
           [disabled]="isLoading"
         />
+        @if (emailCtrl.touched && emailCtrl.errors?.['required']) {
+        <div class="error-message">Email is required</div>
+        } @if (emailCtrl.touched && emailCtrl.errors?.['email']) {
+        <div class="error-message">Please enter a valid email</div>
+        }
       </div>
 
       <div class="form-group">
@@ -144,8 +164,16 @@
           name="password"
           class="form-input"
           placeholder="Create a password"
+          required
+          minlength="6"
+          #passwordCtrl="ngModel"
           [disabled]="isLoading"
         />
+        @if (passwordCtrl.touched && passwordCtrl.errors?.['required']) {
+        <div class="error-message">Password is required</div>
+        } @if (passwordCtrl.touched && passwordCtrl.errors?.['minlength']) {
+        <div class="error-message">Password must be at least 6 characters</div>
+        }
       </div>
 
       <div class="form-group">
@@ -157,8 +185,13 @@
           name="confirmPassword"
           class="form-input"
           placeholder="Confirm your password"
+          required
+          #confirmPasswordCtrl="ngModel"
           [disabled]="isLoading"
         />
+        @if (confirmPasswordCtrl.touched && confirmPasswordCtrl.invalid) {
+        <div class="error-message">Confirm password is required</div>
+        }
       </div>
 
       @if (errorMessage) {
@@ -171,7 +204,11 @@
       </div>
       }
 
-      <button type="submit" class="signup-btn" [disabled]="isLoading || socialLoading !== ''">
+      <button
+        type="submit"
+        class="signup-btn"
+        [disabled]="isLoading || socialLoading !== '' || signupForm.invalid"
+      >
         @if (isLoading) {
         <span class="loading-spinner"></span>
         Creating Account... } @else { Create Account }

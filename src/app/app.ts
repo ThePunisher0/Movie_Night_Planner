@@ -1,15 +1,11 @@
 // src/app/app.component.ts
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { MovieSelectionComponent } from './components/movie-selection/movie-selection.component';
-import { EventSummaryComponent } from './components/event-summary/event-summary.component';
-import { SavedEventsComponent } from './components/saved-events/saved-events.component';
 import { MovieNight } from './model/interface-movie-night';
 import { MovieService } from './services/movie';
 import { MovieNightService } from './services/movie-night';
 import { RouterOutlet } from '@angular/router';
 import { NavigationComponent } from './components/navigation/navigation';
-import { EventPlanningComponent } from "./components/event-planning/event-planning";
 
 @Component({
   selector: 'app-root',
@@ -17,11 +13,7 @@ import { EventPlanningComponent } from "./components/event-planning/event-planni
   imports: [
     RouterOutlet,
     CommonModule,
-    MovieSelectionComponent,
-    EventSummaryComponent,
-    SavedEventsComponent,
     NavigationComponent,
-    EventPlanningComponent
 ],
   templateUrl: './app.html',
   styleUrl: './app.scss',

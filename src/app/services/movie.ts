@@ -13,7 +13,7 @@ export class MovieService {
       genre: 'Sci-Fi',
       rating: 8.7,
       duration: 136,
-      poster: 'images/movies/the-matrix.jpg',
+      poster: 'images/movies/matrix.jpg',
       selected: false,
     },
     {
@@ -31,7 +31,7 @@ export class MovieService {
       genre: 'Action',
       rating: 8.0,
       duration: 143,
-      poster: 'images/movies/the-avengers.jpg',
+      poster: 'images/movies/avengers.jpg',
       selected: false,
     },
     {
@@ -49,7 +49,7 @@ export class MovieService {
       genre: 'Horror',
       rating: 7.7,
       duration: 104,
-      poster: 'images/movies/get-out.jpg',
+      poster: 'images/movies/getout.jpg',
       selected: false,
     },
     {
